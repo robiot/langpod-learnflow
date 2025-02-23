@@ -1,12 +1,46 @@
+
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Stars, useTexture } from "@react-three/drei";
+import { OrbitControls, Stars, useTexture, Text } from "@react-three/drei";
 import { useRef, Suspense, useMemo } from "react";
 import * as THREE from "three";
 import { Sparkles } from "lucide-react";
 
+const Pin = ({ position, flagEmoji }: { position: THREE.Vector3; flagEmoji: string }) => {
+  const pinHeight = 0.4;
+  const pinHeadRadius = 0.15;
+  
+  return (
+    <group position={position}>
+      {/* Pin head (circle) */}
+      <mesh position={[0, pinHeight/2, 0]}>
+        <circleGeometry args={[pinHeadRadius, 32]} />
+        <meshStandardMaterial color="#FFFFFF" />
+      </mesh>
+      {/* Pin head outline */}
+      <lineSegments position={[0, pinHeight/2, 0.001]}>
+        <edgesGeometry args={[new THREE.CircleGeometry(pinHeadRadius, 32)]} />
+        <lineBasicMaterial color="#E3492D" linewidth={1} />
+      </lineSegments>
+      {/* Pin body */}
+      <mesh position={[0, 0, 0]} rotation={[0, 0, 0]}>
+        <cylinderGeometry args={[0.03, 0.03, pinHeight, 12]} />
+        <meshStandardMaterial color="#E3492D" />
+      </mesh>
+      {/* Flag emoji text */}
+      <Text
+        position={[0, pinHeight/2, 0.01]}
+        fontSize={0.15}
+        anchorX="center"
+        anchorY="middle"
+      >
+        {flagEmoji}
+      </Text>
+    </group>
+  );
+};
+
 const Globe = () => {
   const meshRef = useRef<THREE.Mesh>(null);
-  const pointsRef = useRef<THREE.Points>(null);
 
   const earthTexture = useTexture('/earth-texture.jpg');
 
@@ -46,10 +80,10 @@ const Globe = () => {
   }, [earthTexture]);
 
   const languages = [
-    { name: "Chinese", lat: 35.8617, lon: 104.1954, color: "#DE2910" },
-    { name: "Swedish", lat: 60.1282, lon: 18.6435, color: "#006AA7" },
-    { name: "Spanish", lat: 40.4637, lon: -3.7492, color: "#F1BF00" },
-    { name: "Thai", lat: 15.87, lon: 100.9925, color: "#00247D" },
+    { name: "Chinese", lat: 35.8617, lon: 104.1954, emoji: "🇨🇳" },
+    { name: "Swedish", lat: 60.1282, lon: 18.6435, emoji: "🇸🇪" },
+    { name: "Spanish", lat: 40.4637, lon: -3.7492, emoji: "🇪🇸" },
+    { name: "Thai", lat: 15.87, lon: 100.9925, emoji: "🇹🇭" },
   ];
 
   const convertLatLonToVector = (lat: number, lon: number, radius: number) => {
@@ -76,17 +110,7 @@ const Globe = () => {
       {languages.map((lang) => {
         const position = convertLatLonToVector(lang.lat, lang.lon, 2.1);
         return (
-          <group key={lang.name} position={position}>
-            <mesh>
-              <sphereGeometry args={[0.1, 16, 16]} />
-              <meshStandardMaterial
-                color={lang.color}
-                emissive={lang.color}
-                emissiveIntensity={0.5}
-              />
-            </mesh>
-            <pointLight color={lang.color} intensity={0.5} distance={1} />
-          </group>
+          <Pin key={lang.name} position={position} flagEmoji={lang.emoji} />
         );
       })}
     </group>
