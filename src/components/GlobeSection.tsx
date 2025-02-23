@@ -146,7 +146,7 @@ const GlobeSection = () => {
                 </Suspense>
               </Canvas>
             </div>
-            <div className="w-56 p-6 space-y-4 bg-white/40 backdrop-blur-sm">
+            <div className="w-56 w-full p-6 space-y-4 bg-white/40 backdrop-blur-sm">
               <h3 className="text-2xl font-bold text-gray-900">We Support:</h3>
               <ul className="space-y-4">
                 {supportedLanguages.map((language, index) => (
