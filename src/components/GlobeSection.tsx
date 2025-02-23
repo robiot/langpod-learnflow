@@ -1,49 +1,78 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Stars, useTexture, Text } from "@react-three/drei";
-import { useRef, Suspense, useMemo } from "react";
+import { useRef, Suspense, useMemo, useEffect, useState } from "react";
 import * as THREE from "three";
 import { Sparkles } from "lucide-react";
+import twemoji from "twemoji";
+
+const loadTwemoji = async (emoji: string): Promise<string> => {
+  return new Promise((resolve) => {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = 128;
+    canvas.height = 128;
+
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = twemoji.parse(emoji).match(/src="([^"]+)"/)?.[1] || "";
+
+    img.onload = () => {
+      ctx?.drawImage(img, 0, 0, 128, 128);
+      resolve(canvas.toDataURL());
+    };
+  });
+};
 
 const Pin = ({ position, flagEmoji }: { position: THREE.Vector3; flagEmoji: string }) => {
   const pinHeadRef = useRef<THREE.Group>(null);
   const pinHeight = 0.4;
-  const pinHeadRadius = 0.15;
+  const pinHeadSize = 0.1; // Smaller size for the pin head
+  const [emojiTexture, setEmojiTexture] = useState<THREE.Texture | null>(null);
   
+  useEffect(() => {
+    const loadEmoji = async () => {
+      const emojiDataUrl = await loadTwemoji(flagEmoji);
+      const texture = new THREE.TextureLoader().load(emojiDataUrl);
+      setEmojiTexture(texture);
+    };
+    loadEmoji();
+  }, [flagEmoji]);
+
   useFrame(({ camera }) => {
     if (pinHeadRef.current) {
-      // Make only the pin head face the camera
       pinHeadRef.current.lookAt(camera.position);
     }
   });
 
   return (
     <group position={position}>
-      {/* Pin head group (circle + emoji) that will face camera */}
       <group ref={pinHeadRef} position={[0, pinHeight/2, 0]}>
-        {/* Pin head (circle) */}
+        {/* Pin head (rounded square) */}
         <mesh>
-          <circleGeometry args={[pinHeadRadius, 32]} />
+          <roundedBoxGeometry args={[pinHeadSize, pinHeadSize, 0.01, 4, 0.02]} />
           <meshStandardMaterial color="#FFFFFF" />
         </mesh>
         {/* Pin head outline */}
         <lineSegments position={[0, 0, 0.001]}>
-          <edgesGeometry args={[new THREE.CircleGeometry(pinHeadRadius, 32)]} />
-          <lineBasicMaterial color="#E3492D" linewidth={1} />
+          <edgesGeometry args={[new THREE.BoxGeometry(pinHeadSize, pinHeadSize, 0.01)]} />
+          <lineBasicMaterial color="#999999" linewidth={0.5} />
         </lineSegments>
-        {/* Flag emoji text */}
-        <Text
-          position={[0, 0, 0.01]}
-          fontSize={0.15}
-          anchorX="center"
-          anchorY="middle"
-        >
-          {flagEmoji}
-        </Text>
+        {/* Emoji plane */}
+        {emojiTexture && (
+          <mesh position={[0, 0, 0.011]}>
+            <planeGeometry args={[pinHeadSize * 0.8, pinHeadSize * 0.8]} />
+            <meshBasicMaterial
+              map={emojiTexture}
+              transparent
+              side={THREE.DoubleSide}
+            />
+          </mesh>
+        )}
       </group>
 
       {/* Pin body - stays fixed */}
       <mesh position={[0, pinHeight/4, 0]} rotation={[0, 0, 0]}>
-        <cylinderGeometry args={[0.03, 0.03, pinHeight/2, 12]} />
+        <cylinderGeometry args={[0.02, 0.02, pinHeight/2, 12]} />
         <meshStandardMaterial color="#E3492D" />
       </mesh>
     </group>
