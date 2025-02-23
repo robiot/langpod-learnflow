@@ -22,12 +22,47 @@ const HeroSection = () => {
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center">
-            <Button size="lg" className="text-lg px-8 hover-lift">
+            <button 
+              className="rainbow-button inline-flex items-center justify-center text-lg px-8 py-3 rounded-md text-white font-medium hover:shadow-lg transition-shadow"
+            >
               Start Learning
-            </Button>
+            </button>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .rainbow-button {
+          background: linear-gradient(in lch longer hue, 
+            from hsl(0 100% 50%),
+            via hsl(30 100% 50%),
+            via hsl(60 100% 50%),
+            via hsl(150 100% 50%),
+            via hsl(210 100% 50%),
+            via hsl(270 100% 50%),
+            to hsl(330 100% 50%)
+          );
+          background-size: 200% 200%;
+          animation: gradient 4s linear infinite;
+        }
+
+        .rainbow-button:hover {
+          animation: gradient 4s linear infinite;
+          animation-composition: add;
+        }
+
+        @keyframes gradient {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+      `}</style>
     </section>
   );
 };
