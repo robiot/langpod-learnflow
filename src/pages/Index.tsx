@@ -206,47 +206,16 @@ const Index = () => {
       {/* Footer */}
       <footer className="relative z-10 border-t border-gray-200 animate-in">
         <div className="container mx-auto px-4 py-12">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="space-y-4">
-              <div className="text-2xl font-bold text-gradient">
-                LangPod
-              </div>
-              <p className="text-gray-600">
-                Master any language with AI-powered conversations and personalized learning.
-              </p>
+          <div className="flex flex-col items-center text-center space-y-4">
+            <div className="text-2xl font-bold text-gradient">
+              LangPod
             </div>
-            
-            {[
-              {
-                title: "Product",
-                links: ["Features", "Pricing", "Languages", "Enterprise"],
-              },
-              {
-                title: "Resources",
-                links: ["Blog", "Documentation", "Guides", "API"],
-              },
-              {
-                title: "Company",
-                links: ["About", "Careers", "Contact", "Press"],
-              },
-            ].map((section, index) => (
-              <div key={index} className="space-y-4">
-                <h3 className="font-semibold text-gray-900">{section.title}</h3>
-                <ul className="space-y-2">
-                  {section.links.map((link, linkIndex) => (
-                    <li key={linkIndex}>
-                      <a href="#" className="text-gray-600 hover:text-primary transition-colors">
-                        {link}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-          
-          <div className="mt-12 pt-8 border-t border-gray-200 text-center text-gray-600 text-sm">
-            &copy; {new Date().getFullYear()} LangPod. All rights reserved.
+            <p className="text-gray-600 max-w-md">
+              Master any language with AI-powered conversations and personalized learning.
+            </p>
+            <div className="mt-8 text-gray-600 text-sm">
+              &copy; {new Date().getFullYear()} LangPod. All rights reserved.
+            </div>
           </div>
         </div>
       </footer>
