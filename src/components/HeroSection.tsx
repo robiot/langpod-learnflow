@@ -57,7 +57,7 @@ const HeroSection = () => {
             background-size: 200% 100%;
             animation: moveGradient 3s linear infinite;
             border-radius: 4px;
-            filter: blur(1px);
+            filter: blur(4px);
             opacity: 0.8;
           }
 
