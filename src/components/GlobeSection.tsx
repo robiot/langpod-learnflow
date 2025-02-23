@@ -88,7 +88,6 @@ const Pin = ({ position, flagEmoji }: { position: THREE.Vector3; flagEmoji: stri
 
 const Globe = () => {
   const meshRef = useRef<THREE.Mesh>(null);
-
   const earthTexture = useTexture('/earth-texture.jpg');
 
   const globeMaterial = useMemo(() => {
@@ -134,11 +133,15 @@ const Globe = () => {
   ];
 
   const convertLatLonToVector = (lat: number, lon: number, radius: number) => {
-    const phi = (90 - lat) * (Math.PI / 180);
-    const theta = (lon + 180) * (Math.PI / 180);
-    const x = -(radius * Math.sin(phi) * Math.cos(theta));
-    const z = radius * Math.sin(phi) * Math.sin(theta);
-    const y = radius * Math.cos(phi);
+    // Convert latitude and longitude from degrees to radians
+    const latRad = (lat * Math.PI) / 180;
+    const lonRad = (-lon * Math.PI) / 180; // Negative longitude to match texture orientation
+    
+    // Calculate the position using spherical coordinates
+    const x = radius * Math.cos(latRad) * Math.cos(lonRad);
+    const y = radius * Math.sin(latRad);
+    const z = radius * Math.cos(latRad) * Math.sin(lonRad);
+    
     return new THREE.Vector3(x, y, z);
   };
 
