@@ -15,7 +15,9 @@ const loadTwemoji = async (emoji: string): Promise<string> => {
 
     const img = new Image();
     img.crossOrigin = "anonymous";
-    img.src = twemoji.parse(emoji).match(/src="([^"]+)"/)?.[1] || "";
+    img.src = twemoji.parse(emoji, {
+      base: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/",
+    }).match(/src="([^"]+)"/)?.[1] || "";
 
     img.onload = () => {
       ctx?.drawImage(img, 0, 0, 128, 128);
