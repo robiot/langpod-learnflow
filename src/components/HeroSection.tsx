@@ -41,9 +41,9 @@ const HeroSection = () => {
             content: '';
             position: absolute;
             left: -2px;
-            bottom: -3px;
+            bottom: -2px;
             width: calc(100% + 4px);
-            height: 2px;
+            height: 3px;
             background: linear-gradient(
               90deg,
               hsl(0, 100%, 50%),
