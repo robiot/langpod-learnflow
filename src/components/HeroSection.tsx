@@ -23,7 +23,7 @@ const HeroSection = () => {
 
           <div className="flex flex-wrap gap-4 justify-center">
             <button 
-              className="rainbow-button inline-flex items-center justify-center text-lg px-8 py-3 rounded-md text-white font-medium hover:shadow-lg transition-shadow"
+              className="glow-button relative inline-flex items-center justify-center text-lg px-8 py-3 rounded-md bg-gray-900 text-white font-medium hover:bg-gray-800 transition-colors"
             >
               Start Learning
             </button>
@@ -33,7 +33,17 @@ const HeroSection = () => {
 
       <style>
         {`
-          .rainbow-button {
+          .glow-button {
+            position: relative;
+          }
+
+          .glow-button::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 100%;
+            height: 3px;
             background: linear-gradient(
               90deg,
               hsl(0, 100%, 50%),
@@ -44,23 +54,18 @@ const HeroSection = () => {
               hsl(270, 100%, 50%),
               hsl(330, 100%, 50%)
             );
-            background-size: 200% 200%;
-            animation: gradient 4s linear infinite;
+            background-size: 200% 100%;
+            animation: moveGradient 2s linear infinite;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
           }
 
-          .rainbow-button:hover {
-            animation: gradient 2s linear infinite;
-          }
-
-          @keyframes gradient {
+          @keyframes moveGradient {
             0% {
               background-position: 0% 50%;
             }
-            50% {
-              background-position: 100% 50%;
-            }
             100% {
-              background-position: 0% 50%;
+              background-position: 200% 50%;
             }
           }
         `}
