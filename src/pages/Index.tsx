@@ -1,6 +1,5 @@
-
 import { Button } from "@/components/ui/button";
-import { Sparkles, Globe, Mic, MessageSquare, Brain, Zap, Users, Target, Trophy } from "lucide-react";
+import { Sparkles, Globe, Mic, MessageSquare, Brain, Zap, Target, ChartLine } from "lucide-react";
 
 const Index = () => {
   return (
@@ -31,6 +30,69 @@ const Index = () => {
           </div>
         </div>
       </nav>
+
+      {/* Features Section - Now First */}
+      <section className="pt-32 pb-16 px-4 relative z-10">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-16 animate-in">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Master Any Language with <span className="text-gradient">AI-Powered Learning</span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Experience the future of language learning with our comprehensive platform
+            </p>
+          </div>
+          
+          <div className="feature-grid">
+            {[
+              {
+                icon: <Target className="w-6 h-6 text-primary" />,
+                title: "Personalized Learning Paths",
+                description: "Get a customized learning experience tailored to your goals, interests, and proficiency level.",
+              },
+              {
+                icon: <Mic className="w-6 h-6 text-primary" />,
+                title: "Dynamic Voice Conversations",
+                description: "Practice with AI-powered voice interactions for natural language learning.",
+              },
+              {
+                icon: <MessageSquare className="w-6 h-6 text-primary" />,
+                title: "Scenario-based Lessons",
+                description: "Learn through real-world scenarios and practical conversations.",
+              },
+              {
+                icon: <ChartLine className="w-6 h-6 text-primary" />,
+                title: "Progress Tracking",
+                description: "Monitor your improvement with detailed progress analytics and insights.",
+              },
+              {
+                icon: <Brain className="w-6 h-6 text-primary" />,
+                title: "Adaptive Difficulty",
+                description: "Experience dynamic difficulty adjustment based on your performance.",
+              },
+              {
+                icon: <Sparkles className="w-6 h-6 text-primary" />,
+                title: "Achievement System",
+                description: "Stay motivated with rewards and milestones as you progress.",
+              }
+            ].map((feature, index) => (
+              <div
+                key={index}
+                className="glass p-6 space-y-4 hover-lift animate-in"
+                style={{ 
+                  animationDelay: `${index * 100}ms`,
+                }}
+              >
+                <div className="p-3 w-fit rounded-lg bg-primary/10 animate-pulse-slow">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-semibold">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Hero Section - Now without images */}
       <section className="pt-32 pb-16 px-4 relative z-10">
@@ -102,69 +164,6 @@ const Index = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent rounded-2xl" />
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-24 px-4 bg-gradient-to-b from-gray-50 to-white relative z-10">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16 animate-in">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Everything You Need to <span className="text-gradient">Master a New Language</span>
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Our comprehensive platform combines cutting-edge AI technology with proven learning methods
-            </p>
-          </div>
-          
-          <div className="feature-grid">
-            {[
-              {
-                icon: <Brain className="w-6 h-6 text-primary" />,
-                title: "AI-Powered Learning",
-                description: "Personalized lessons that adapt to your pace and style, powered by advanced machine learning algorithms.",
-              },
-              {
-                icon: <MessageSquare className="w-6 h-6 text-primary" />,
-                title: "Natural Conversations",
-                description: "Practice with AI language partners in realistic scenarios and daily conversations.",
-              },
-              {
-                icon: <Mic className="w-6 h-6 text-primary" />,
-                title: "Voice Recognition",
-                description: "Get instant feedback on pronunciation and accent with our advanced speech recognition.",
-              },
-              {
-                icon: <Target className="w-6 h-6 text-primary" />,
-                title: "Personalized Goals",
-                description: "Set and track your language learning goals with customized study plans.",
-              },
-              {
-                icon: <Globe className="w-6 h-6 text-primary" />,
-                title: "Multiple Languages",
-                description: "Choose from a wide range of languages and learn at your own pace.",
-              },
-              {
-                icon: <Trophy className="w-6 h-6 text-primary" />,
-                title: "Achievement System",
-                description: "Stay motivated with rewards and track your progress through milestones.",
-              }
-            ].map((feature, index) => (
-              <div
-                key={index}
-                className="glass p-6 space-y-4 hover-lift animate-in"
-                style={{ 
-                  animationDelay: `${index * 100}ms`,
-                }}
-              >
-                <div className="p-3 w-fit rounded-lg bg-primary/10 animate-pulse-slow">
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-semibold">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
