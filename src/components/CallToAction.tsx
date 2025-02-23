@@ -12,7 +12,7 @@ const CallToAction = () => {
             <span className="text-sm font-medium">Start Your Journey Today</span>
           </div>
           
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
             Ready to Transform Your
             <span className="text-gradient"> Language Learning</span> Journey?
           </h2>
