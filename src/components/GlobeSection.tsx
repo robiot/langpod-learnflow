@@ -6,11 +6,21 @@ import * as THREE from "three";
 import { Sparkles } from "lucide-react";
 
 const Pin = ({ position, flagEmoji }: { position: THREE.Vector3; flagEmoji: string }) => {
+  const groupRef = useRef<THREE.Group>(null);
   const pinHeight = 0.4;
   const pinHeadRadius = 0.15;
   
+  useFrame(({ camera }) => {
+    if (groupRef.current) {
+      // Make the pin face the camera
+      groupRef.current.lookAt(camera.position);
+      // Add 90 degrees rotation to make the pin point outward from the globe
+      groupRef.current.rotateX(Math.PI / 2);
+    }
+  });
+
   return (
-    <group position={position}>
+    <group position={position} ref={groupRef}>
       {/* Pin head (circle) */}
       <mesh position={[0, pinHeight/2, 0]}>
         <circleGeometry args={[pinHeadRadius, 32]} />
