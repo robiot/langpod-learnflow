@@ -1,9 +1,13 @@
+
 import { Button } from "@/components/ui/button";
 import { Sparkles, Globe, Mic, MessageSquare, Brain, Zap, Target, ChartLine } from "lucide-react";
 
 const Index = () => {
   return (
     <div className="min-h-screen w-full overflow-hidden bg-gradient-to-b from-white to-gray-50 relative">
+      {/* Animated Gradient Background */}
+      <div className="animated-gradient" />
+      
       {/* Grid Background */}
       <div className="grid-background opacity-30" />
       
