@@ -1,5 +1,6 @@
+
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Stars, useTexture, Text } from "@react-three/drei";
+import { OrbitControls, Stars, useTexture } from "@react-three/drei";
 import { useRef, Suspense, useMemo, useEffect, useState } from "react";
 import * as THREE from "three";
 import { Sparkles } from "lucide-react";
@@ -26,7 +27,7 @@ const loadTwemoji = async (emoji: string): Promise<string> => {
 const Pin = ({ position, flagEmoji }: { position: THREE.Vector3; flagEmoji: string }) => {
   const pinHeadRef = useRef<THREE.Group>(null);
   const pinHeight = 0.4;
-  const pinHeadSize = 0.1; // Smaller size for the pin head
+  const pinHeadSize = 0.1;
   const [emojiTexture, setEmojiTexture] = useState<THREE.Texture | null>(null);
   
   useEffect(() => {
@@ -47,10 +48,14 @@ const Pin = ({ position, flagEmoji }: { position: THREE.Vector3; flagEmoji: stri
   return (
     <group position={position}>
       <group ref={pinHeadRef} position={[0, pinHeight/2, 0]}>
-        {/* Pin head (rounded square) */}
+        {/* Pin head (box with slightly rounded appearance) */}
         <mesh>
-          <roundedBoxGeometry args={[pinHeadSize, pinHeadSize, 0.01, 4, 0.02]} />
-          <meshStandardMaterial color="#FFFFFF" />
+          <boxGeometry args={[pinHeadSize, pinHeadSize, 0.01]} />
+          <meshStandardMaterial 
+            color="#FFFFFF"
+            roughness={0.3}
+            metalness={0.2}
+          />
         </mesh>
         {/* Pin head outline */}
         <lineSegments position={[0, 0, 0.001]}>
