@@ -1,4 +1,3 @@
-
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Stars, useTexture } from "@react-three/drei";
 import { useRef, Suspense, useMemo, useEffect, useState } from "react";
@@ -72,14 +71,6 @@ const Pin = ({
   return (
     <group position={position}>
       <group ref={pinHeadRef} position={[0, pinHeight / 2, 0]}>
-        <mesh>
-          <boxGeometry args={[pinHeadSize, pinHeadSize, 0.01]} />
-          <meshStandardMaterial 
-            color="#FFFFFF"
-            roughness={1}
-            metalness={0}
-          />
-        </mesh>
         <lineSegments position={[0, 0, 0.001]}>
           <edgesGeometry
             args={[new THREE.BoxGeometry(pinHeadSize, pinHeadSize, 0.01)]}
