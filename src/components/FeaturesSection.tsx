@@ -1,11 +1,16 @@
 
-import { Target, Mic, MessageSquare, ChartLine, Brain, Sparkles } from "lucide-react";
+import { Target, Mic, MessageSquare, ChartLine, Brain, GraduationCap } from "lucide-react";
 
 const features = [
   {
     icon: <Target className="w-6 h-6 text-primary" />,
     title: "Personalized Learning Paths",
     description: "Get a customized learning experience tailored to your goals, interests, and proficiency level.",
+  },
+  {
+    icon: <GraduationCap className="w-6 h-6 text-primary" />,
+    title: "AI Language Coach",
+    description: "Receive personalized feedback and guidance from your dedicated AI language coach to improve faster.",
   },
   {
     icon: <Mic className="w-6 h-6 text-primary" />,
@@ -26,11 +31,6 @@ const features = [
     icon: <Brain className="w-6 h-6 text-primary" />,
     title: "Adaptive Difficulty",
     description: "Experience dynamic difficulty adjustment based on your performance.",
-  },
-  {
-    icon: <Sparkles className="w-6 h-6 text-primary" />,
-    title: "Achievement System",
-    description: "Stay motivated with rewards and milestones as you progress.",
   }
 ];
 
