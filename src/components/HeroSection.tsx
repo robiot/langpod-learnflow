@@ -23,10 +23,9 @@ const HeroSection = () => {
 
           <div className="flex flex-wrap gap-4 justify-center">
             <button 
-              className="glow-button relative inline-flex items-center justify-center text-lg px-8 py-3 rounded-md text-white font-medium hover:bg-gray-800 transition-colors"
+              className="glow-button relative inline-flex items-center justify-center text-lg px-8 py-3 rounded-md bg-gray-900 text-white font-medium hover:bg-gray-800 transition-colors"
             >
-              <span className="relative z-10 bg-gray-900 w-full h-full absolute inset-0 rounded-md"></span>
-              <span className="relative z-20">Start Learning</span>
+              Start Learning
             </button>
           </div>
         </div>
@@ -60,7 +59,7 @@ const HeroSection = () => {
             border-radius: 4px;
             filter: blur(4px);
             opacity: 0.8;
-            z-index: 1;
+            z-index: -1;
           }
 
           @keyframes moveGradient {
