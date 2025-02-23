@@ -32,56 +32,75 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - Now without images */}
       <section className="pt-32 pb-16 px-4 relative z-10">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center space-y-8 animate-in max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary animate-float">
+              <Sparkles size={16} />
+              <span className="text-sm font-medium">AI-Powered Language Learning</span>
+            </div>
+            
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900">
+              Master Any Language with
+              <span className="text-primary"> AI Conversations</span>
+            </h1>
+            
+            <p className="text-xl text-gray-600">
+              Experience personalized, scenario-based lessons using advanced voice technology. Learn naturally through dynamic conversations.
+            </p>
+
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Button size="lg" className="text-lg px-8 hover-lift">
+                Start Learning
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="text-lg px-8 hover:bg-primary hover:text-white hover-lift"
+              >
+                Try Demo
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* New Section - Before Features */}
+      <section className="py-24 px-4 bg-gradient-to-b from-white to-gray-50 relative z-10">
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 animate-in">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary animate-float">
-                <Sparkles size={16} />
-                <span className="text-sm font-medium">AI-Powered Language Learning</span>
-              </div>
-              
-              <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900">
-                Master Any Language with
-                <span className="text-primary"> AI Conversations</span>
-              </h1>
-              
-              <p className="text-xl text-gray-600">
-                Experience personalized, scenario-based lessons using advanced voice technology. Learn naturally through dynamic conversations.
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+                Learn Through
+                <span className="text-gradient"> Natural Conversations</span>
+              </h2>
+              <p className="text-lg text-gray-600">
+                Practice with AI language partners that adapt to your level and learning style. Get instant feedback and improve your speaking skills naturally.
               </p>
-
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="text-lg px-8 hover-lift">
-                  Start Learning
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="text-lg px-8 hover:bg-primary hover:text-white hover-lift"
-                >
-                  Try Demo
-                </Button>
-              </div>
+              <ul className="space-y-4">
+                {[
+                  "Realistic conversation scenarios",
+                  "Natural language processing",
+                  "Adaptive difficulty levels",
+                  "Real-time pronunciation feedback",
+                ].map((feature, index) => (
+                  <li key={index} className="flex items-center gap-3 animate-in" style={{ animationDelay: `${index * 100}ms` }}>
+                    <div className="p-1 rounded-full bg-primary/10">
+                      <Sparkles className="w-4 h-4 text-primary" />
+                    </div>
+                    <span className="text-gray-700">{feature}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-
-            <div className="image-grid animate-in" style={{ animationDelay: "200ms" }}>
+            <div className="relative animate-in" style={{ animationDelay: "200ms" }}>
               <img 
-                src="/photo-1581091226825-a6a2a5aee158" 
-                alt="Language Learning"
-                className="hover-scale"
+                src="/photo-1649972904349-6e44c42644a7"
+                alt="Natural Language Learning"
+                className="rounded-2xl shadow-2xl hover-scale"
               />
-              <img 
-                src="/photo-1605810230434-7631ac76ec81" 
-                alt="AI Conversations"
-                className="hover-scale"
-              />
-              <img 
-                src="/photo-1519389950473-47ba0277781c" 
-                alt="Interactive Learning"
-                className="hover-scale"
-              />
-              <div className="image-grid-overlay" />
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent rounded-2xl" />
             </div>
           </div>
         </div>
@@ -242,4 +261,3 @@ const Index = () => {
 };
 
 export default Index;
-
