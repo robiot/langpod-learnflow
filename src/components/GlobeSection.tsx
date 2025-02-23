@@ -1,3 +1,4 @@
+
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Stars, useTexture } from "@react-three/drei";
 import { useRef, Suspense, useMemo, useEffect, useState } from "react";
@@ -91,7 +92,13 @@ const Pin = ({
 
       <mesh position={[0, -0.1, 0]} rotation={[0, 0, 0]}>
         <sphereGeometry args={[0.02, 8, 8]} />
-        <meshStandardMaterial color="#E3492D" />
+        <meshStandardMaterial 
+          color="#E3492D"
+          roughness={0.3}
+          metalness={0}
+          emissive="#E3492D"
+          emissiveIntensity={0.2}
+        />
       </mesh>
     </group>
   );
@@ -188,8 +195,9 @@ const GlobeSection = () => {
               gl={{ antialias: true }}
             >
               <Suspense fallback={null}>
-                <ambientLight intensity={0.5} />
-                <directionalLight position={[10, 10, 5]} intensity={1} />
+                <ambientLight intensity={1.5} />
+                <directionalLight position={[5, 5, 5]} intensity={2} />
+                <directionalLight position={[-5, -5, -5]} intensity={1} />
                 <Globe />
                 <Stars
                   radius={100}
