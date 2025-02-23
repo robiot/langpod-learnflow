@@ -1,3 +1,4 @@
+
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import FeaturesSection from "@/components/FeaturesSection";
@@ -5,7 +6,6 @@ import ConversationsSection from "@/components/ConversationsSection";
 import GlobeSection from "@/components/GlobeSection";
 import CallToAction from "@/components/CallToAction";
 import Footer from "@/components/Footer";
-import { ThreeTest } from "@/components/Three";
 
 const Index = () => {
   return (

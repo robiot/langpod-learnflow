@@ -166,19 +166,6 @@ const GlobeSection = () => {
               </ul>
             </div>
           </div>
-
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-6">
-              {["Chinese", "Swedish", "Spanish", "Thai"].map((language) => (
-                <div
-                  key={language}
-                  className="glass p-4 rounded-lg text-center hover-lift"
-                >
-                  <p className="font-semibold text-gray-900">{language}</p>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
     </section>
