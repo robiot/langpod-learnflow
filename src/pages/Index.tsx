@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Sparkles, Globe, Mic, MessageSquare, Brain, Zap, Target, ChartLine } from "lucide-react";
 
@@ -56,13 +55,6 @@ const Index = () => {
             <div className="flex flex-wrap gap-4 justify-center">
               <Button size="lg" className="text-lg px-8 hover-lift">
                 Start Learning
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="text-lg px-8 hover:bg-primary hover:text-white hover-lift"
-              >
-                Try Demo
               </Button>
             </div>
           </div>
