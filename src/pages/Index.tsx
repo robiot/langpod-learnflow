@@ -164,40 +164,31 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-24 px-4 relative z-10">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8 animate-in">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-                Learn Faster with 
-                <span className="text-gradient"> AI-Powered Feedback</span>
-              </h2>
-              <p className="text-lg text-gray-600">
-                Our advanced AI provides real-time corrections and suggestions to help you improve your pronunciation and grammar quickly.
-              </p>
-              <ul className="space-y-4">
-                {[
-                  "Real-time pronunciation feedback",
-                  "Grammar correction and explanations",
-                  "Vocabulary suggestions based on context",
-                  "Personalized learning path",
-                ].map((benefit, index) => (
-                  <li key={index} className="flex items-center gap-3 animate-in" style={{ animationDelay: `${index * 100}ms` }}>
-                    <div className="p-1 rounded-full bg-primary/10">
-                      <Sparkles className="w-4 h-4 text-primary" />
-                    </div>
-                    <span className="text-gray-700">{benefit}</span>
-                  </li>
-                ))}
-              </ul>
+      {/* Ready to Transform Section */}
+      <section className="py-24 px-4 bg-gradient-to-b from-white to-gray-50 relative z-10">
+        <div className="container mx-auto max-w-4xl text-center">
+          <div className="space-y-8 animate-in">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary animate-float">
+              <Sparkles size={16} />
+              <span className="text-sm font-medium">Start Your Journey Today</span>
             </div>
-            <div className="relative animate-in" style={{ animationDelay: "200ms" }}>
-              <img 
-                src="/photo-1486312338219-ce68d2c6f44d"
-                alt="AI Language Learning"
-                className="rounded-2xl shadow-2xl hover-scale"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent rounded-2xl" />
+            
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+              Ready to Transform Your
+              <span className="text-gradient"> Language Learning</span> Journey?
+            </h2>
+            
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Join thousands of learners who are already experiencing the future of language learning with AI-powered conversations.
+            </p>
+
+            <div className="flex justify-center gap-4 pt-4">
+              <Button 
+                size="lg"
+                className="text-lg px-8 hover-lift bg-primary text-white hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                Get Started Now
+              </Button>
             </div>
           </div>
         </div>
