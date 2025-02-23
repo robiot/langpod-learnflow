@@ -1,4 +1,3 @@
-
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Stars, useTexture, Text } from "@react-three/drei";
 import { useRef, Suspense, useMemo } from "react";
@@ -6,45 +5,47 @@ import * as THREE from "three";
 import { Sparkles } from "lucide-react";
 
 const Pin = ({ position, flagEmoji }: { position: THREE.Vector3; flagEmoji: string }) => {
-  const groupRef = useRef<THREE.Group>(null);
+  const pinHeadRef = useRef<THREE.Group>(null);
   const pinHeight = 0.4;
   const pinHeadRadius = 0.15;
   
   useFrame(({ camera }) => {
-    if (groupRef.current) {
-      // Make the pin face the camera
-      groupRef.current.lookAt(camera.position);
-      // Add 90 degrees rotation to make the pin point outward from the globe
-      groupRef.current.rotateX(Math.PI / 2);
+    if (pinHeadRef.current) {
+      // Make only the pin head face the camera
+      pinHeadRef.current.lookAt(camera.position);
     }
   });
 
   return (
-    <group position={position} ref={groupRef}>
-      {/* Pin head (circle) */}
-      <mesh position={[0, pinHeight/2, 0]}>
-        <circleGeometry args={[pinHeadRadius, 32]} />
-        <meshStandardMaterial color="#FFFFFF" />
-      </mesh>
-      {/* Pin head outline */}
-      <lineSegments position={[0, pinHeight/2, 0.001]}>
-        <edgesGeometry args={[new THREE.CircleGeometry(pinHeadRadius, 32)]} />
-        <lineBasicMaterial color="#E3492D" linewidth={1} />
-      </lineSegments>
-      {/* Pin body */}
-      <mesh position={[0, 0, 0]} rotation={[0, 0, 0]}>
-        <cylinderGeometry args={[0.03, 0.03, pinHeight, 12]} />
+    <group position={position}>
+      {/* Pin head group (circle + emoji) that will face camera */}
+      <group ref={pinHeadRef} position={[0, pinHeight/2, 0]}>
+        {/* Pin head (circle) */}
+        <mesh>
+          <circleGeometry args={[pinHeadRadius, 32]} />
+          <meshStandardMaterial color="#FFFFFF" />
+        </mesh>
+        {/* Pin head outline */}
+        <lineSegments position={[0, 0, 0.001]}>
+          <edgesGeometry args={[new THREE.CircleGeometry(pinHeadRadius, 32)]} />
+          <lineBasicMaterial color="#E3492D" linewidth={1} />
+        </lineSegments>
+        {/* Flag emoji text */}
+        <Text
+          position={[0, 0, 0.01]}
+          fontSize={0.15}
+          anchorX="center"
+          anchorY="middle"
+        >
+          {flagEmoji}
+        </Text>
+      </group>
+
+      {/* Pin body - stays fixed */}
+      <mesh position={[0, pinHeight/4, 0]} rotation={[0, 0, 0]}>
+        <cylinderGeometry args={[0.03, 0.03, pinHeight/2, 12]} />
         <meshStandardMaterial color="#E3492D" />
       </mesh>
-      {/* Flag emoji text */}
-      <Text
-        position={[0, pinHeight/2, 0.01]}
-        fontSize={0.15}
-        anchorX="center"
-        anchorY="middle"
-      >
-        {flagEmoji}
-      </Text>
     </group>
   );
 };
