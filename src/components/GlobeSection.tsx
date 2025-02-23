@@ -1,3 +1,4 @@
+
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Stars, useTexture } from "@react-three/drei";
 import { useRef, Suspense, useMemo, useEffect, useState } from "react";
@@ -72,12 +73,12 @@ const Pin = ({
     <group position={position}>
       <group ref={pinHeadRef} position={[0, pinHeight / 2, 0]}>
         <mesh>
-          {/* <boxGeometry args={[pinHeadSize, pinHeadSize, 0.01]} />
+          <boxGeometry args={[pinHeadSize, pinHeadSize, 0.01]} />
           <meshStandardMaterial 
             color="#FFFFFF"
             roughness={1}
             metalness={0}
-          /> */}
+          />
         </mesh>
         <lineSegments position={[0, 0, 0.001]}>
           <edgesGeometry
@@ -144,19 +145,6 @@ const Globe = () => {
     });
   }, [earthTexture]);
 
-  // const supportedLanguages = [
-  //   "English",
-  //   "Spanish",
-  //   "Chinese",
-  //   "Swedish",
-  //   "Russian",
-  //   "Finnish",
-  //   "French",
-  //   "German",
-  //   "Dutch",
-  //   "Japanese",
-  // ];
-
   const convertLatLonToVector = (lat: number, lon: number, radius: number) => {
     const latRad = ((lat - 23) * Math.PI) / 180;
     const lonRad = (-(lon - 15) * Math.PI) / 180;
@@ -174,7 +162,7 @@ const Globe = () => {
 
   return (
     <group rotation={[-0.09, -Math.PI * -0.95, 0]}>
-      <mesh ref={meshRef} material={globeMaterial} >
+      <mesh ref={meshRef} material={globeMaterial}>
         <sphereGeometry args={[2, 64, 64]} />
       </mesh>
 
@@ -229,7 +217,7 @@ const GlobeSection = () => {
               </Suspense>
             </Canvas>
           </div>
-          <div className="absolute lg:right-0 bottom-0 lg:top-0 w-full lg:w-[320px] p-6 py-14 space-y-4 bg-white/40 backdrop-blur-sm lg:border-l border-t lg:border-t-0 border-white/10 flex flex-col gap-2 ">
+          <div className="absolute lg:right-0 bottom-0 lg:top-0 w-full lg:w-[320px] p-6 py-14 space-y-4 bg-white/40 backdrop-blur-sm lg:border-l border-t lg:border-t-0 border-white/10 flex flex-col gap-2">
             <h3 className="text-2xl font-bold text-gray-900">We Support:</h3>
             <ul className="space-y-4">
               {languages.map((language, index) => (
