@@ -34,7 +34,7 @@ const ConversationsSection = () => {
           </div>
           <div className="relative animate-in" style={{ animationDelay: "200ms" }}>
             <img 
-              src="/photo-1519389950473-47ba0277781c"
+              src="/photo-1581091226825-a6a2a5aee158"
               alt="Natural Language Learning"
               className="rounded-2xl shadow-2xl hover-scale"
             />
