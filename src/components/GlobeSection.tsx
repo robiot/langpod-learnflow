@@ -1,3 +1,4 @@
+
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Stars, useTexture } from "@react-three/drei";
 import { useRef, Suspense, useMemo } from "react";
@@ -127,54 +128,57 @@ const GlobeSection = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 items-center">
-          <div className="relative h-[600px] w-full rounded-xl overflow-hidden glass">
-            <Canvas camera={{ position: [0, 0, 6], fov: 45 }} gl={{ antialias: true }}>
-              <Suspense fallback={null}>
-                <ambientLight intensity={0.5} />
-                <directionalLight position={[10, 10, 5]} intensity={1} />
-                <Globe />
-                <Stars radius={100} depth={50} count={5000} factor={4} fade={true} />
-                <OrbitControls
-                  enableZoom={false}
-                  autoRotate
-                  autoRotateSpeed={0.5}
-                  minPolarAngle={Math.PI / 3}
-                  maxPolarAngle={Math.PI / 1.5}
-                />
-              </Suspense>
-            </Canvas>
-          </div>
-
-          <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">We Support:</h3>
-            <ul className="space-y-4">
-              {supportedLanguages.map((language, index) => (
-                <li key={index} className="flex items-center gap-3 animate-in" style={{ animationDelay: `${index * 100}ms` }}>
+          <div className="relative h-[600px] w-full rounded-xl overflow-hidden glass flex">
+            <div className="flex-1">
+              <Canvas camera={{ position: [0, 0, 6], fov: 45 }} gl={{ antialias: true }}>
+                <Suspense fallback={null}>
+                  <ambientLight intensity={0.5} />
+                  <directionalLight position={[10, 10, 5]} intensity={1} />
+                  <Globe />
+                  <Stars radius={100} depth={50} count={5000} factor={4} fade={true} />
+                  <OrbitControls
+                    enableZoom={false}
+                    autoRotate
+                    autoRotateSpeed={0.5}
+                    minPolarAngle={Math.PI / 3}
+                    maxPolarAngle={Math.PI / 1.5}
+                  />
+                </Suspense>
+              </Canvas>
+            </div>
+            <div className="w-56 p-6 space-y-4 bg-white/40 backdrop-blur-sm">
+              <h3 className="text-2xl font-bold text-gray-900">We Support:</h3>
+              <ul className="space-y-4">
+                {supportedLanguages.map((language, index) => (
+                  <li key={index} className="flex items-center gap-3 animate-in" style={{ animationDelay: `${index * 100}ms` }}>
+                    <div className="p-1 rounded-full bg-primary/10">
+                      <Sparkles className="w-4 h-4 text-primary" />
+                    </div>
+                    <span className="text-gray-700">{language}</span>
+                  </li>
+                ))}
+                <li className="flex items-center gap-3 animate-in" style={{ animationDelay: `${supportedLanguages.length * 100}ms` }}>
                   <div className="p-1 rounded-full bg-primary/10">
                     <Sparkles className="w-4 h-4 text-primary" />
                   </div>
-                  <span className="text-gray-700">{language}</span>
+                  <span className="text-gray-700 font-medium">And every other language</span>
                 </li>
-              ))}
-              <li className="flex items-center gap-3 animate-in" style={{ animationDelay: `${supportedLanguages.length * 100}ms` }}>
-                <div className="p-1 rounded-full bg-primary/10">
-                  <Sparkles className="w-4 h-4 text-primary" />
-                </div>
-                <span className="text-gray-700 font-medium">And every other language</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-          {["Chinese", "Swedish", "Spanish", "Thai"].map((language) => (
-            <div
-              key={language}
-              className="glass p-4 rounded-lg text-center hover-lift"
-            >
-              <p className="font-semibold text-gray-900">{language}</p>
+              </ul>
             </div>
-          ))}
+          </div>
+
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-6">
+              {["Chinese", "Swedish", "Spanish", "Thai"].map((language) => (
+                <div
+                  key={language}
+                  className="glass p-4 rounded-lg text-center hover-lift"
+                >
+                  <p className="font-semibold text-gray-900">{language}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
