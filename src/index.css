@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,7 +36,11 @@
   }
 
   .glass {
-    @apply bg-white/80 backdrop-blur-lg border border-white/20 rounded-2xl shadow-lg;
+    @apply bg-white/60 backdrop-blur-xl border-b border-white/10 shadow-sm;
+  }
+
+  .nav-item {
+    @apply px-4 py-2 rounded-lg transition-colors hover:bg-white/20 text-gray-700 font-medium;
   }
 
   .feature-grid {

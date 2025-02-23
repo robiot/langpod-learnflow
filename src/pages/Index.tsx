@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Sparkles, Globe, Mic, MessageSquare, Brain, Zap, Users, Target, Trophy } from "lucide-react";
 
@@ -9,15 +10,31 @@ const Index = () => {
       
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 glass">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <div className="text-2xl font-semibold text-primary">LangPod</div>
-            <Button
-              variant="outline"
-              className="hover:bg-primary hover:text-white transition-all duration-300"
-            >
-              Login
-            </Button>
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-8">
+              <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
+                LangPod
+              </div>
+              <div className="hidden md:flex items-center gap-2">
+                <a href="#features" className="nav-item">Features</a>
+                <a href="#pricing" className="nav-item">Pricing</a>
+                <a href="#about" className="nav-item">About</a>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <Button
+                variant="ghost"
+                className="hover:bg-primary/10 hover:text-primary transition-all duration-300"
+              >
+                Sign in
+              </Button>
+              <Button
+                className="bg-primary hover:bg-primary/90 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                Get Started
+              </Button>
+            </div>
           </div>
         </div>
       </nav>
