@@ -1,4 +1,3 @@
-
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Stars, useTexture } from "@react-three/drei";
 import { useRef, Suspense, useMemo, useEffect, useState } from "react";
@@ -50,7 +49,6 @@ const Pin = ({ position, flagEmoji }: { position: THREE.Vector3; flagEmoji: stri
   return (
     <group position={position}>
       <group ref={pinHeadRef} position={[0, pinHeight/2, 0]}>
-        {/* Pin head (box with slightly rounded appearance) */}
         <mesh>
           <boxGeometry args={[pinHeadSize, pinHeadSize, 0.01]} />
           <meshStandardMaterial 
@@ -59,12 +57,10 @@ const Pin = ({ position, flagEmoji }: { position: THREE.Vector3; flagEmoji: stri
             metalness={0.2}
           />
         </mesh>
-        {/* Pin head outline */}
         <lineSegments position={[0, 0, 0.001]}>
           <edgesGeometry args={[new THREE.BoxGeometry(pinHeadSize, pinHeadSize, 0.01)]} />
           <lineBasicMaterial color="#999999" linewidth={0.5} />
         </lineSegments>
-        {/* Emoji plane */}
         {emojiTexture && (
           <mesh position={[0, 0, 0.011]}>
             <planeGeometry args={[pinHeadSize * 0.8, pinHeadSize * 0.8]} />
@@ -77,7 +73,6 @@ const Pin = ({ position, flagEmoji }: { position: THREE.Vector3; flagEmoji: stri
         )}
       </group>
 
-      {/* Pin body - stays fixed */}
       <mesh position={[0, pinHeight/4, 0]} rotation={[0, 0, 0]}>
         <cylinderGeometry args={[0.02, 0.02, pinHeight/2, 12]} />
         <meshStandardMaterial color="#E3492D" />
@@ -127,21 +122,17 @@ const Globe = () => {
 
   const languages = [
     { name: "Chinese", lat: 35.8617, lon: 104.1954, emoji: "🇨🇳" },
-    { name: "Swedish", lat: 60.1282, lon: 18.6435, emoji: "🇸🇪" },
-    { name: "Spanish", lat: 40.4637, lon: -3.7492, emoji: "🇪🇸" },
-    { name: "Thai", lat: 15.87, lon: 100.9925, emoji: "🇹🇭" },
+    { name: "Swedish", lat: 59.3293, lon: 18.0686, emoji: "🇸🇪" },
+    { name: "Spanish", lat: 40.4168, lon: -3.7038, emoji: "🇪🇸" },
+    { name: "Thai", lat: 13.7563, lon: 100.5018, emoji: "🇹🇭" },
   ];
 
   const convertLatLonToVector = (lat: number, lon: number, radius: number) => {
-    // Convert latitude and longitude from degrees to radians
     const latRad = (lat * Math.PI) / 180;
-    const lonRad = (-lon * Math.PI) / 180; // Negative longitude to match texture orientation
-    
-    // Calculate the position using spherical coordinates
+    const lonRad = (-lon * Math.PI) / 180;
     const x = radius * Math.cos(latRad) * Math.cos(lonRad);
     const y = radius * Math.sin(latRad);
     const z = radius * Math.cos(latRad) * Math.sin(lonRad);
-    
     return new THREE.Vector3(x, y, z);
   };
 
