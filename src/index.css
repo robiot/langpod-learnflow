@@ -57,10 +57,37 @@
     background-position: top center;
     @apply absolute inset-0 z-0 opacity-30;
   }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    @apply relative rounded-2xl overflow-hidden shadow-2xl;
+  }
+
+  .image-grid img {
+    @apply w-full h-full object-cover rounded-lg transition-transform duration-500;
+  }
+
+  .image-grid-overlay {
+    @apply absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent;
+  }
 }
 
 .animate-in {
   animation: fadeIn 0.5s ease-out forwards;
+}
+
+.hover-lift {
+  @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+}
+
+.hover-scale {
+  @apply transition-all duration-300 hover:scale-105;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70;
 }
 
 @keyframes fadeIn {
@@ -99,3 +126,4 @@
 .animate-pulse-slow {
   animation: pulse 3s ease-in-out infinite;
 }
+
