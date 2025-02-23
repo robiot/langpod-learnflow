@@ -2,8 +2,21 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Stars, useTexture } from "@react-three/drei";
 import { useRef, Suspense, useMemo, useEffect, useState } from "react";
 import * as THREE from "three";
-import { Sparkles } from "lucide-react";
+import { Languages, Sparkles } from "lucide-react";
 import twemoji from "twemoji";
+
+const languages = [
+  { name: "English", lat: 37.0902, lon: -95.7129, emoji: "🇺🇸" },
+  { name: "Spanish", lat: 40.4168, lon: 3.7038, emoji: "🇪🇸" },
+  { name: "Chinese", lat: 35.8617, lon: 104.1954, emoji: "🇨🇳" },
+  { name: "Swedish", lat: 59.3293, lon: 18.0686, emoji: "🇸🇪" },
+  { name: "Russian", lat: 61.524, lon: 105.3188, emoji: "🇷🇺" },
+  { name: "Finnish", lat: 60.9241, lon: 28.7482, emoji: "🇫🇮" },
+  { name: "French", lat: 43.2276, lon: 10.21, emoji: "🇫🇷" },
+  { name: "German", lat: 48.1657, lon: 16.4515, emoji: "🇩🇪" },
+  { name: "Dutch", lat: 46.1326, lon: 6.2913, emoji: "🇳🇱" },
+  { name: "Japanese", lat: 38.2048, lon: 145.2529, emoji: "🇯🇵" },
+];
 
 const loadTwemoji = async (emoji: string): Promise<string> => {
   return new Promise((resolve) => {
@@ -14,9 +27,12 @@ const loadTwemoji = async (emoji: string): Promise<string> => {
 
     const img = new Image();
     img.crossOrigin = "anonymous";
-    img.src = twemoji.parse(emoji, {
-      base: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/",
-    }).match(/src="([^"]+)"/)?.[1] || "";
+    img.src =
+      twemoji
+        .parse(emoji, {
+          base: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/",
+        })
+        .match(/src="([^"]+)"/)?.[1] || "";
 
     img.onload = () => {
       ctx?.drawImage(img, 0, 0, 128, 128);
@@ -25,12 +41,18 @@ const loadTwemoji = async (emoji: string): Promise<string> => {
   });
 };
 
-const Pin = ({ position, flagEmoji }: { position: THREE.Vector3; flagEmoji: string }) => {
+const Pin = ({
+  position,
+  flagEmoji,
+}: {
+  position: THREE.Vector3;
+  flagEmoji: string;
+}) => {
   const pinHeadRef = useRef<THREE.Group>(null);
-  const pinHeight = 0.4;
+  const pinHeight = 0.2;
   const pinHeadSize = 0.1;
   const [emojiTexture, setEmojiTexture] = useState<THREE.Texture | null>(null);
-  
+
   useEffect(() => {
     const loadEmoji = async () => {
       const emojiDataUrl = await loadTwemoji(flagEmoji);
@@ -48,17 +70,19 @@ const Pin = ({ position, flagEmoji }: { position: THREE.Vector3; flagEmoji: stri
 
   return (
     <group position={position}>
-      <group ref={pinHeadRef} position={[0, pinHeight/2, 0]}>
+      <group ref={pinHeadRef} position={[0, pinHeight / 2, 0]}>
         <mesh>
-          <boxGeometry args={[pinHeadSize, pinHeadSize, 0.01]} />
+          {/* <boxGeometry args={[pinHeadSize, pinHeadSize, 0.01]} />
           <meshStandardMaterial 
             color="#FFFFFF"
-            roughness={0.3}
-            metalness={0.2}
-          />
+            roughness={1}
+            metalness={0}
+          /> */}
         </mesh>
         <lineSegments position={[0, 0, 0.001]}>
-          <edgesGeometry args={[new THREE.BoxGeometry(pinHeadSize, pinHeadSize, 0.01)]} />
+          <edgesGeometry
+            args={[new THREE.BoxGeometry(pinHeadSize, pinHeadSize, 0.01)]}
+          />
           <lineBasicMaterial color="#999999" linewidth={0.5} />
         </lineSegments>
         {emojiTexture && (
@@ -73,8 +97,8 @@ const Pin = ({ position, flagEmoji }: { position: THREE.Vector3; flagEmoji: stri
         )}
       </group>
 
-      <mesh position={[0, pinHeight/4, 0]} rotation={[0, 0, 0]}>
-        <cylinderGeometry args={[0.02, 0.02, pinHeight/2, 12]} />
+      <mesh position={[0, -0.1, 0]} rotation={[0, 0, 0]}>
+        <sphereGeometry args={[0.02, 8, 8]} />
         <meshStandardMaterial color="#E3492D" />
       </mesh>
     </group>
@@ -83,13 +107,13 @@ const Pin = ({ position, flagEmoji }: { position: THREE.Vector3; flagEmoji: stri
 
 const Globe = () => {
   const meshRef = useRef<THREE.Mesh>(null);
-  const earthTexture = useTexture('/earth-texture.jpg');
+  const earthTexture = useTexture("/earth-texture.jpg");
 
   const globeMaterial = useMemo(() => {
     return new THREE.ShaderMaterial({
       uniforms: {
         globeTexture: { value: earthTexture },
-        time: { value: 0 }
+        time: { value: 0 },
       },
       vertexShader: `
         varying vec2 vUv;
@@ -120,16 +144,22 @@ const Globe = () => {
     });
   }, [earthTexture]);
 
-  const languages = [
-    { name: "Chinese", lat: 35.8617, lon: 104.1954, emoji: "🇨🇳" },
-    { name: "Swedish", lat: 59.3293, lon: 18.0686, emoji: "🇸🇪" },
-    { name: "Spanish", lat: 40.4168, lon: -3.7038, emoji: "🇪🇸" },
-    { name: "Thai", lat: 13.7563, lon: 100.5018, emoji: "🇹🇭" },
-  ];
+  // const supportedLanguages = [
+  //   "English",
+  //   "Spanish",
+  //   "Chinese",
+  //   "Swedish",
+  //   "Russian",
+  //   "Finnish",
+  //   "French",
+  //   "German",
+  //   "Dutch",
+  //   "Japanese",
+  // ];
 
   const convertLatLonToVector = (lat: number, lon: number, radius: number) => {
-    const latRad = (lat * Math.PI) / 180;
-    const lonRad = (-lon * Math.PI) / 180;
+    const latRad = ((lat - 23) * Math.PI) / 180;
+    const lonRad = (-(lon - 15) * Math.PI) / 180;
     const x = radius * Math.cos(latRad) * Math.cos(lonRad);
     const y = radius * Math.sin(latRad);
     const z = radius * Math.cos(latRad) * Math.sin(lonRad);
@@ -143,8 +173,8 @@ const Globe = () => {
   });
 
   return (
-    <group>
-      <mesh ref={meshRef} material={globeMaterial}>
+    <group rotation={[-0.09, -Math.PI * -0.95, 0]}>
+      <mesh ref={meshRef} material={globeMaterial} >
         <sphereGeometry args={[2, 64, 64]} />
       </mesh>
 
@@ -159,24 +189,6 @@ const Globe = () => {
 };
 
 const GlobeSection = () => {
-  const supportedLanguages = [
-    "English",
-    "Swedish",
-    "Chinese",
-    "Arabic",
-    "Spanish",
-    "French",
-    "German",
-    "Japanese",
-    "Korean",
-    "Russian",
-    "Portuguese",
-    "Italian",
-    "Dutch",
-    "Hindi",
-    "Turkish",
-  ];
-
   return (
     <section className="py-32 relative z-10">
       <div className="container mx-auto max-w-6xl">
@@ -190,15 +202,23 @@ const GlobeSection = () => {
             numerous world languages
           </p>
         </div>
-
-        <div className="relative h-[600px] w-full rounded-xl overflow-hidden glass">
-          <div className="absolute inset-0 right-[320px]">
-            <Canvas camera={{ position: [0, 0, 6], fov: 45 }} gl={{ antialias: true }}>
+        <div className="relative h-[600px] w-full rounded-xl overflow-hidden glass flex flex-col">
+          <div className="absolute inset-0 lg:right-[320px] h-[300px] lg:h-auto">
+            <Canvas
+              camera={{ position: [0, 0, 6], fov: 45 }}
+              gl={{ antialias: true }}
+            >
               <Suspense fallback={null}>
                 <ambientLight intensity={0.5} />
                 <directionalLight position={[10, 10, 5]} intensity={1} />
                 <Globe />
-                <Stars radius={100} depth={50} count={5000} factor={4} fade={true} />
+                <Stars
+                  radius={100}
+                  depth={50}
+                  count={5000}
+                  factor={4}
+                  fade={true}
+                />
                 <OrbitControls
                   enableZoom={false}
                   autoRotate
@@ -209,22 +229,33 @@ const GlobeSection = () => {
               </Suspense>
             </Canvas>
           </div>
-          <div className="absolute right-0 top-0 bottom-0 w-[320px] p-6 space-y-4 bg-white/40 backdrop-blur-sm border-l border-white/10">
+          <div className="absolute lg:right-0 bottom-0 lg:top-0 w-full lg:w-[320px] p-6 py-14 space-y-4 bg-white/40 backdrop-blur-sm lg:border-l border-t lg:border-t-0 border-white/10 flex flex-col gap-2 ">
             <h3 className="text-2xl font-bold text-gray-900">We Support:</h3>
             <ul className="space-y-4">
-              {supportedLanguages.map((language, index) => (
-                <li key={index} className="flex items-center gap-3 animate-in" style={{ animationDelay: `${index * 100}ms` }}>
+              {languages.map((language, index) => (
+                <li
+                  key={index}
+                  className="flex items-center gap-3 animate-in"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
                   <div className="p-1 rounded-full bg-primary/10">
-                    <Sparkles className="w-4 h-4 text-primary" />
+                    <Languages className="w-4 h-4 text-primary" />
                   </div>
-                  <span className="text-gray-700">{language}</span>
+                  <span className="text-gray-700">{language.name}</span>
                 </li>
               ))}
-              <li className="flex items-center gap-3 animate-in" style={{ animationDelay: `${supportedLanguages.length * 100}ms` }}>
+              <li
+                className="flex items-center gap-3 animate-in"
+                style={{
+                  animationDelay: `${languages.length * 100}ms`,
+                }}
+              >
                 <div className="p-1 rounded-full bg-primary/10">
                   <Sparkles className="w-4 h-4 text-primary" />
                 </div>
-                <span className="text-gray-700 font-medium">And every other language</span>
+                <span className="text-primary font-bold">
+                  And every other language
+                </span>
               </li>
             </ul>
           </div>
