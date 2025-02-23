@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import * as THREE from 'three';
 
 const Globe = () => {
-  const meshRef = useRef();
+  const meshRef = useRef<THREE.Mesh>(null);
   
   // Language coordinates (approximate)
   const languages = [
@@ -38,7 +38,7 @@ const Globe = () => {
       </mesh>
 
       {/* Language points */}
-      {languages.map((lang, index) => {
+      {languages.map((lang) => {
         const position = convertLatLonToVector(lang.lat, lang.lon, 2.1);
         return (
           <group key={lang.name} position={position}>
