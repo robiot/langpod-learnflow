@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Sparkles, Globe, Mic, MessageSquare, Brain, Zap, Users, Target, Trophy } from "lucide-react";
 
@@ -151,6 +150,53 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="relative z-10 border-t border-gray-200">
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="space-y-4">
+              <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
+                LangPod
+              </div>
+              <p className="text-gray-600">
+                Master any language with AI-powered conversations and personalized learning.
+              </p>
+            </div>
+            
+            <div className="space-y-4">
+              <h3 className="font-semibold text-gray-900">Product</h3>
+              <ul className="space-y-2">
+                <li><a href="#features" className="text-gray-600 hover:text-primary transition-colors">Features</a></li>
+                <li><a href="#pricing" className="text-gray-600 hover:text-primary transition-colors">Pricing</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Enterprise</a></li>
+              </ul>
+            </div>
+            
+            <div className="space-y-4">
+              <h3 className="font-semibold text-gray-900">Company</h3>
+              <ul className="space-y-2">
+                <li><a href="#about" className="text-gray-600 hover:text-primary transition-colors">About</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Blog</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Careers</a></li>
+              </ul>
+            </div>
+            
+            <div className="space-y-4">
+              <h3 className="font-semibold text-gray-900">Support</h3>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Help Center</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Contact</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Privacy Policy</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-gray-200 mt-12 pt-8 text-center text-gray-600">
+            <p>&copy; {new Date().getFullYear()} LangPod. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
